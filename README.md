@@ -87,3 +87,12 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 ```json
 {"success":true,"classification":{"content":"ChocolateLolita02","contentType":"email","result":"UNSAFE","isSafe":false,"modelUsed":"gemini","source":"api","rawResponse":"UNSAFE"},"timestamp":"2026-02-06T10:19:55.490Z"}
 ```
+
+## Running server using pm2 
+
+```bash
+pm2 start content-classifier-server.js
+```
+pm2 save
+pm2 startup
+
