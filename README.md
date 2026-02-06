@@ -48,6 +48,9 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 | `OPENAI_API_KEY` | - | Required for OpenAI provider |
 | `GEMINI_API_KEY` | - | Required for Gemini provider |
 
+## Health Check
+- **Health check**: `GET /`
+
 ## Example Response
 
 ### Success Response
@@ -67,4 +70,20 @@ The server will start on `http://localhost:3000` (or the port specified in your 
   },
   "timestamp": "2026-02-06T10:12:07.248Z"
 }
+```
+
+## Using name endpoint
+
+```curl "http://localhost:3000/classify?name=ChocolateLolita02"```
+
+```json
+{"success":true,"classification":{"content":"ChocolateLolita02","contentType":"name","result":"UNSAFE","isSafe":false,"modelUsed":"gemini","source":"api","rawResponse":"UNSAFE"},"timestamp":"2026-02-06T10:19:55.490Z"}
+```
+
+## Using email endpoint
+
+```curl "http://localhost:3000/classify?email=ChocolateLolita02"```
+
+```json
+{"success":true,"classification":{"content":"ChocolateLolita02","contentType":"email","result":"UNSAFE","isSafe":false,"modelUsed":"gemini","source":"api","rawResponse":"UNSAFE"},"timestamp":"2026-02-06T10:19:55.490Z"}
 ```
