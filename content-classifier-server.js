@@ -248,7 +248,6 @@ app.get('/classify', async (req, res) => {
                 contentType: result.contentType,
                 result: result.isSafe ? 'SAFE' : 'UNSAFE',
                 isSafe: result.isSafe,
-                confidence: result.confidence,
                 modelUsed: result.modelUsed,
                 source: result.fromCache ? 'cache' : 'api',
                 rawResponse: result.rawResponse
@@ -298,10 +297,8 @@ app.get('/classify-combined', async (req, res) => {
                 combinedAnalysis: true,
                 result: result.isSafe ? 'SAFE' : 'UNSAFE',
                 isSafe: result.isSafe,
-                confidence: result.confidence,
                 modelUsed: result.modelUsed,
-                source: result.fromCache ? 'cache' : 'api',
-                reasoning: 'Analyzed both name and username together for contextual appropriateness'
+                source: result.fromCache ? 'cache' : 'api'
             },
             timestamp: new Date().toISOString()
         });

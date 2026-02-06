@@ -49,20 +49,22 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 | `GEMINI_API_KEY` | - | Required for Gemini provider |
 
 ## Example Response
+
+### Success Response
+```curl "http://localhost:3000/classify-combined?name=Modreen%20Moyo&username=ChocolateLolita02"```
+
 ```json
 {
   "success": true,
   "classification": {
-    "content": "John Doe",
-    "contentType": "name",
-    "result": "SAFE",
-    "isSafe": true,
-    "confidence": "high",
-    "modelUsed": "openai",
+    "name": "Modreen Moyo",
+    "username": "ChocolateLolita02",
+    "combinedAnalysis": true,
+    "result": "UNSAFE",
+    "isSafe": false,
+    "modelUsed": "gemini",
     "source": "api"
   },
-  "timestamp": "2024-01-01T12:00:00.000Z"
+  "timestamp": "2026-02-06T10:12:07.248Z"
 }
 ```
-
-For failed response status code will be 500 
