@@ -1,8 +1,3 @@
-/**
- * Classification examples for training AI models
- * 0 = UNSAFE, 1 = SAFE
- */
-
 const COMBINED_EXAMPLES = [
     {
         'name': 'Kerry Anne Ward',
