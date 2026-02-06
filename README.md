@@ -54,7 +54,8 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 ## Example Response
 
 ### Success Response
-```curl "http://localhost:3000/classify-combined?name=Modreen%20Moyo&username=ChocolateLolita02"```
+```curl "curl --location 'http://localhost:3000/classify-combined?name=Modreen%20Moyo&username=ChocolateLolita02' \
+--header 'Authorization: Bearer your_secure_api_key_here'```
 
 ```json
 {
@@ -74,7 +75,8 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 
 ## Using name endpoint
 
-```curl "http://localhost:3000/classify?name=ChocolateLolita02"```
+```curl "curl --location 'http://localhost:3000/classify?name=ChocolateLolita02' \
+--header 'Authorization: Bearer your_secure_api_key_here'"```
 
 ```json
 {"success":true,"classification":{"content":"ChocolateLolita02","contentType":"name","result":"UNSAFE","isSafe":false,"modelUsed":"gemini","source":"api","rawResponse":"UNSAFE"},"timestamp":"2026-02-06T10:19:55.490Z"}
@@ -82,7 +84,7 @@ The server will start on `http://localhost:3000` (or the port specified in your 
 
 ## Using email endpoint
 
-```curl "http://localhost:3000/classify?email=ChocolateLolita02"```
+```curl "curl --location 'http://localhost:3000/classify?email=ChocolateLolita02' \ --header 'Authorization: Bearer your_secure_api_key_here'"```
 
 ```json
 {"success":true,"classification":{"content":"ChocolateLolita02","contentType":"email","result":"UNSAFE","isSafe":false,"modelUsed":"gemini","source":"api","rawResponse":"UNSAFE"},"timestamp":"2026-02-06T10:19:55.490Z"}
