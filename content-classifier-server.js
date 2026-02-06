@@ -11,6 +11,35 @@ const classificationCache = new Map();
 
 app.use(express.json());
 
+// authentication middleware to validate API key
+function authenticateApiKey(req, res, next) {
+    const apiKey = req.headers['x-api-key'] || req.headers['authorization']?.replace('Bearer ', '');
+    
+    if (!apiKey) {
+        return res.status(401).json({
+            error: 'Authentication required',
+            message: 'API key must be provided in X-API-Key header'
+        });
+    }
+
+    if (!process.env.API_KEY) {
+        console.log('API_KEY not set in environment variables.');
+        return res.status(500).json({
+            error: 'Internal Server Error',
+            message: 'Server configuration error'
+        });
+    }
+    
+    if (apiKey !== process.env.API_KEY) {
+        return res.status(403).json({
+            error: 'Invalid API key',
+            message: 'The provided API key is not valid'
+        });
+    }
+    
+    next();
+}
+
 const AI_CONFIG = {
     provider: process.env.AI_PROVIDER || 'openai',
     model: process.env.AI_MODEL || 'gpt-4o-mini',
@@ -209,7 +238,7 @@ async function classifyContent(content, contentType) {
 }
 
 
-app.get('/classify', async (req, res) => {
+app.get('/classify', authenticateApiKey, async (req, res) => {
     try {
         const { name, email } = req.query;
 
@@ -264,7 +293,7 @@ app.get('/classify', async (req, res) => {
     }
 });
 
-app.get('/classify-combined', async (req, res) => {
+app.get('/classify-combined', authenticateApiKey, async (req, res) => {
     try {
         const { name, username } = req.query;
         
@@ -320,7 +349,7 @@ app.get('/', (req, res) => {
     });
 });
 
-app.post('/clear-cache', (req, res) => {
+app.post('/clear-cache', authenticateApiKey, (req, res) => {
     const previousSize = classificationCache.size;
     classificationCache.clear();
     
