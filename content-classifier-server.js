@@ -312,6 +312,14 @@ app.get('/classify-combined', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    console.log('Server is running');
+    res.status(200).json({
+        message: 'Server is running',
+        timestamp: new Date().toISOString()
+    });
+});
+
 app.post('/clear-cache', (req, res) => {
     const previousSize = classificationCache.size;
     classificationCache.clear();
